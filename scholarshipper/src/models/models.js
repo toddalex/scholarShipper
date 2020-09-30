@@ -1,4 +1,5 @@
 const { Pool } = require('pg');
+require('dotenv').config();
 
 const POSTGRES = process.env.PG_URI;
 

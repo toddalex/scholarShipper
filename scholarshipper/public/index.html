@@ -4,41 +4,44 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <title>ScholarShipper</title>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
+    <link
+      rel="stylesheet"
+      href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css"
+      integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk"
+      crossorigin="anonymous"
+    />
+
   </head>
   <body>
     <div id="root"></div>
-
     <ul></ul>
     <script>
+      const ul = document.querySelector('ul')
       const electron = require('electron');
       const {ipcRenderer} = electron;
-      const ul = document.querySelector('ul');
-
-      // add cohort 
-      ipcRenderer.on('cohort:add', function(e, cohort) {
-        ul.className = 'collection';
-        const li = document.createElement('li');
-        li.className = 'collection-item';
-        const itemText = document.createTextNode(cohort);
-        li.appendChild(itemText);
-        ul.appendChild(li);
-      });
-
-      // clear cohorts
-      ipcRenderer.on('cohort:clear', function() {
-        ul.innerHTML = '';
-        ul.className = '';
-      });
-
-      // remove cohort
-      ul.addEventListener('dblclick', removeCohort);
-      function removeCohort(e) {
-        e.target.remove();
-        if (ul.children.length == 0) {
-          ul.className = '';
-        }
-      }
-    </script>
+          ipcRenderer.on('cohort:add', function(e, cohort) {
+            ul.className = 'collection';
+            const li = document.createElement('li');
+            li.className = 'collection-item';
+            const itemText = document.createTextNode(cohort);
+            li.appendChild(itemText);
+            ul.appendChild(li);
+          });
+    
+          // clear cohorts
+          ipcRenderer.on('cohort:clear', function() {
+            ul.innerHTML = '';
+            ul.className = '';
+          });
+    
+          // remove cohort
+          ul.addEventListener('dblclick', removeCohort);
+          function removeCohort(e) {
+            e.target.remove();
+            if (ul.children.length == 0) {
+              ul.className = '';
+            }
+          };
+        </script>
   </body>
 </html>
